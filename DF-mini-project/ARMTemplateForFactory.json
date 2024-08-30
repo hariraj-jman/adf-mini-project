@@ -413,7 +413,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS2_SQL",
 								"type": "DatasetReference",
 								"parameters": {
 									"tablename": "products",
@@ -431,7 +431,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS2_blob_input')]",
-				"[concat(variables('factoryId'), '/datasets/DS1_SQL_raw_Admin')]"
+				"[concat(variables('factoryId'), '/datasets/DS2_SQL')]"
 			]
 		},
 		{
@@ -507,6 +507,44 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageProject')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS2_SQL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabaseProject",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"tablename": {
+						"type": "string"
+					},
+					"schema": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "DS2"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().schema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().tablename",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabaseProject')]"
 			]
 		},
 		{
@@ -1105,6 +1143,94 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS1_SQL_raw_Admin')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF2_cleaning')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS2_SQL",
+								"type": "DatasetReference"
+							},
+							"name": "rawProducts"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS2_SQL",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "window1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          category as string,",
+						"          subCategory as string,",
+						"          subCategory1 as string,",
+						"          departmentCode as string,",
+						"          categoryCode as string,",
+						"          categoryName as string,",
+						"          searchCategoryCode as string,",
+						"          seriesCode as string,",
+						"          seriesName as string,",
+						"          brandCode as string,",
+						"          brandUrlCode as string,",
+						"          brandName as string,",
+						"          seriesStatus as string,",
+						"          minStandardDaysToShip as string,",
+						"          maxStandardDaysToShip as string,",
+						"          minPricePerPiece as string,",
+						"          maxPricePerPiece as string,",
+						"          directCartType as string,",
+						"          priceCheckLessFlag as string,",
+						"          minStandardUnitPrice as string,",
+						"          maxStandardUnitPrice as string,",
+						"          recommendFlag as string,",
+						"          iconTypeList as string,",
+						"          volumeDiscountFlag as string,",
+						"          cValueFlag as string,",
+						"          stockItemFlag as string,",
+						"          displayStandardPriceFlag as string,",
+						"          discontinuedProductFlag as string,",
+						"          promptDeliveryFlag as string,",
+						"          keywordClickCount as string,",
+						"          specialShipmentFlag as string,",
+						"          recommendFlagdata as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> rawProducts",
+						"rawProducts window(asc(seriesCode, true),",
+						"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> window1",
+						"window1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS2_SQL')]"
 			]
 		}
 	]
