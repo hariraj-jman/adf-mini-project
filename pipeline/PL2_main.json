@@ -58,7 +58,7 @@
 				]
 			},
 			{
-				"name": "Data flow1",
+				"name": "Cleaning",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -78,14 +78,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DF2_cleaning",
+						"referenceName": "DF2_clean",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"rawProducts": {
 								"tablename": "products",
 								"schema": "raw"
 							},
-							"ToPrep": {
+							"ToPrepLayer": {
 								"tablename": "products",
 								"schema": "prep"
 							}

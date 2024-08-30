@@ -1,5 +1,5 @@
 {
-	"name": "DF2_cleaning",
+	"name": "DF2_clean",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -18,15 +18,18 @@
 						"referenceName": "DS2_SQL",
 						"type": "DatasetReference"
 					},
-					"name": "ToPrep"
+					"name": "ToPrepLayer"
 				}
 			],
 			"transformations": [
 				{
-					"name": "window1"
+					"name": "AddDuplicate"
 				},
 				{
-					"name": "filter1"
+					"name": "FilterDuplicate"
+				},
+				{
+					"name": "DropUnwantedCloumn"
 				}
 			],
 			"scriptLines": [
@@ -69,9 +72,34 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> rawProducts",
 				"rawProducts window(asc(seriesCode, true),",
-				"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> window1",
-				"window1 filter(!Duplicate) ~> filter1",
-				"filter1 sink(allowSchemaDrift: true,",
+				"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> AddDuplicate",
+				"AddDuplicate filter(!Duplicate) ~> FilterDuplicate",
+				"FilterDuplicate select(mapColumn(",
+				"          category,",
+				"          subCategory,",
+				"          subCategory1,",
+				"          departmentCode,",
+				"          categoryCode,",
+				"          categoryName,",
+				"          searchCategoryCode,",
+				"          seriesCode,",
+				"          seriesName,",
+				"          brandCode,",
+				"          brandUrlCode,",
+				"          brandName,",
+				"          minStandardDaysToShip,",
+				"          maxStandardDaysToShip,",
+				"          minPricePerPiece,",
+				"          maxPricePerPiece,",
+				"          minStandardUnitPrice,",
+				"          maxStandardUnitPrice,",
+				"          recommendFlag,",
+				"          volumeDiscountFlag,",
+				"          stockItemFlag",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedCloumn",
+				"DropUnwantedCloumn sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -81,7 +109,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> ToPrep"
+				"     errorHandlingOption: 'stopOnFirstError') ~> ToPrepLayer"
 			]
 		}
 	}
