@@ -18,12 +18,15 @@
 						"referenceName": "DS2_SQL",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "ToPrep"
 				}
 			],
 			"transformations": [
 				{
 					"name": "window1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -67,16 +70,18 @@
 				"     format: 'table') ~> rawProducts",
 				"rawProducts window(asc(seriesCode, true),",
 				"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> window1",
-				"window1 sink(allowSchemaDrift: true,",
+				"window1 filter(!Duplicate) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> ToPrep"
 			]
 		}
 	}
