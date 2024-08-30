@@ -1,0 +1,217 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DF-mini-project"
+		},
+		"AzureBlobStorageProject_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageProject'"
+		},
+		"AzureSqlDatabase_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase'"
+		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabaseNew_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabaseNew'"
+		},
+		"AzureSqlDatabaseProject_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabaseProject'"
+		},
+		"PostgreSql1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'PostgreSql1'"
+		},
+		"PostgreSql2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'PostgreSql2'"
+		},
+		"AzureSqlDatabase_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabase_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql_db_mini"
+		},
+		"AzureSqlDatabase_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "hari"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql_db_sample"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "hari"
+		},
+		"AzureSqlDatabaseNew_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabaseNew_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql_db_mini"
+		},
+		"AzureSqlDatabaseNew_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "hari"
+		},
+		"AzureSqlDatabaseProject_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabaseProject_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql_db_mini"
+		},
+		"AzureSqlDatabaseProject_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "hari"
+		},
+		"PostgreSql1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"PostgreSql1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "quiz"
+		},
+		"PostgreSql1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "postgres"
+		},
+		"PostgreSql2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"PostgreSql2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "quiz"
+		},
+		"PostgreSql2_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "postgres"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "DF-mini-project_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorageProject_connectionString": {
+						"value": "[parameters('AzureBlobStorageProject_connectionString')]"
+					},
+					"AzureSqlDatabase_password": {
+						"value": "[parameters('AzureSqlDatabase_password')]"
+					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"AzureSqlDatabaseProject_password": {
+						"value": "[parameters('AzureSqlDatabaseProject_password')]"
+					},
+					"AzureSqlDatabaseNew_password": {
+						"value": "[parameters('AzureSqlDatabaseNew_password')]"
+					},
+					"PostgreSql1_password": {
+						"value": "[parameters('PostgreSql1_password')]"
+					},
+					"PostgreSql2_password": {
+						"value": "[parameters('PostgreSql2_password')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabaseProject_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabaseProject_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabaseProject_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabaseProject_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabaseProject_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabaseProject_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabaseNew_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabaseNew_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabaseNew_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabaseNew_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabaseNew_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabaseNew_properties_typeProperties_userName')]"
+					},
+					"PostgreSql1_properties_typeProperties_server": {
+						"value": "[parameters('PostgreSql1_properties_typeProperties_server')]"
+					},
+					"PostgreSql1_properties_typeProperties_database": {
+						"value": "[parameters('PostgreSql1_properties_typeProperties_database')]"
+					},
+					"PostgreSql1_properties_typeProperties_username": {
+						"value": "[parameters('PostgreSql1_properties_typeProperties_username')]"
+					},
+					"PostgreSql2_properties_typeProperties_server": {
+						"value": "[parameters('PostgreSql2_properties_typeProperties_server')]"
+					},
+					"PostgreSql2_properties_typeProperties_database": {
+						"value": "[parameters('PostgreSql2_properties_typeProperties_database')]"
+					},
+					"PostgreSql2_properties_typeProperties_username": {
+						"value": "[parameters('PostgreSql2_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

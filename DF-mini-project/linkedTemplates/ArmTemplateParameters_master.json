@@ -1,0 +1,90 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DF-mini-project"
+		},
+		"AzureBlobStorageProject_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"AzureSqlDatabaseNew_password": {
+			"value": ""
+		},
+		"AzureSqlDatabaseProject_password": {
+			"value": ""
+		},
+		"PostgreSql1_password": {
+			"value": ""
+		},
+		"PostgreSql2_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "sql_db_mini"
+		},
+		"AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "hari"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "sql_db_sample"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "hari"
+		},
+		"AzureSqlDatabaseNew_properties_typeProperties_server": {
+			"value": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabaseNew_properties_typeProperties_database": {
+			"value": "sql_db_mini"
+		},
+		"AzureSqlDatabaseNew_properties_typeProperties_userName": {
+			"value": "hari"
+		},
+		"AzureSqlDatabaseProject_properties_typeProperties_server": {
+			"value": "sql-admin22.database.windows.net"
+		},
+		"AzureSqlDatabaseProject_properties_typeProperties_database": {
+			"value": "sql_db_mini"
+		},
+		"AzureSqlDatabaseProject_properties_typeProperties_userName": {
+			"value": "hari"
+		},
+		"PostgreSql1_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"PostgreSql1_properties_typeProperties_database": {
+			"value": "quiz"
+		},
+		"PostgreSql1_properties_typeProperties_username": {
+			"value": "postgres"
+		},
+		"PostgreSql2_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"PostgreSql2_properties_typeProperties_database": {
+			"value": "quiz"
+		},
+		"PostgreSql2_properties_typeProperties_username": {
+			"value": "postgres"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
