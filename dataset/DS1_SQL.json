@@ -1,5 +1,5 @@
 {
-	"name": "DS1_SQL_raw_Admin",
+	"name": "DS1_SQL",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabaseProject",

@@ -58,7 +58,7 @@
 				]
 			},
 			{
-				"name": "Cleaning",
+				"name": "Clean",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -103,7 +103,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Cleaning",
+						"activity": "Clean",
 						"dependencyConditions": [
 							"Succeeded"
 						]

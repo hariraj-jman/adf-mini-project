@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"

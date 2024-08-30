@@ -6,49 +6,49 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "Quiz"
 				},
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "Question"
 				},
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "Option"
 				},
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "Admin"
 				},
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "User"
 				},
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "UserQuiz"
 				},
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "UserAnswer"
@@ -57,7 +57,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DS1_SQL_raw_Admin",
+						"referenceName": "DS1_SQL",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
