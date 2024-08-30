@@ -23,7 +23,7 @@
 			],
 			"transformations": [
 				{
-					"name": "AddDuplicate"
+					"name": "AddDuplicateColumn"
 				},
 				{
 					"name": "FilterDuplicate"
@@ -72,8 +72,8 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> rawProducts",
 				"rawProducts window(asc(seriesCode, true),",
-				"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> AddDuplicate",
-				"AddDuplicate filter(!Duplicate) ~> FilterDuplicate",
+				"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> AddDuplicateColumn",
+				"AddDuplicateColumn filter(!Duplicate) ~> FilterDuplicate",
 				"FilterDuplicate select(mapColumn(",
 				"          category,",
 				"          subCategory,",
