@@ -850,7 +850,7 @@
 					],
 					"transformations": [
 						{
-							"name": "AddDuplicate"
+							"name": "AddDuplicateColumn"
 						},
 						{
 							"name": "FilterDuplicate"
@@ -899,8 +899,8 @@
 						"     isolationLevel: 'READ_UNCOMMITTED',",
 						"     format: 'table') ~> rawProducts",
 						"rawProducts window(asc(seriesCode, true),",
-						"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> AddDuplicate",
-						"AddDuplicate filter(!Duplicate) ~> FilterDuplicate",
+						"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> AddDuplicateColumn",
+						"AddDuplicateColumn filter(!Duplicate) ~> FilterDuplicate",
 						"FilterDuplicate select(mapColumn(",
 						"          category,",
 						"          subCategory,",
@@ -1050,6 +1050,8 @@
 								{
 									"name": "Copy data1",
 									"type": "Copy",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [],
 									"policy": {
 										"timeout": "0.12:00:00",
@@ -1160,14 +1162,7 @@
 								{
 									"name": "Joining",
 									"type": "ExecuteDataFlow",
-									"dependsOn": [
-										{
-											"activity": "Cleaning",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
+									"dependsOn": [],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
