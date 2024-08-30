@@ -51,8 +51,8 @@
 						"referenceName": "DS1_SQL_raw_Admin",
 						"type": "DatasetReference",
 						"parameters": {
-							"tablename": "raw",
-							"schema": "products"
+							"tablename": "products",
+							"schema": "raw"
 						}
 					}
 				]
