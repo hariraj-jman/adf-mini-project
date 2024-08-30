@@ -1,0 +1,154 @@
+{
+	"name": "DS2_blob_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageProject",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DS2"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data.xlsx",
+				"container": "input-container2"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "category",
+				"type": "String"
+			},
+			{
+				"name": "subCategory",
+				"type": "String"
+			},
+			{
+				"name": "subCategory1",
+				"type": "String"
+			},
+			{
+				"name": "departmentCode",
+				"type": "String"
+			},
+			{
+				"name": "categoryCode",
+				"type": "String"
+			},
+			{
+				"name": "categoryName",
+				"type": "String"
+			},
+			{
+				"name": "searchCategoryCode",
+				"type": "String"
+			},
+			{
+				"name": "seriesCode",
+				"type": "String"
+			},
+			{
+				"name": "seriesName",
+				"type": "String"
+			},
+			{
+				"name": "brandCode",
+				"type": "String"
+			},
+			{
+				"name": "brandUrlCode",
+				"type": "String"
+			},
+			{
+				"name": "brandName",
+				"type": "String"
+			},
+			{
+				"name": "seriesStatus",
+				"type": "String"
+			},
+			{
+				"name": "minStandardDaysToShip",
+				"type": "String"
+			},
+			{
+				"name": "maxStandardDaysToShip",
+				"type": "String"
+			},
+			{
+				"name": "minPricePerPiece",
+				"type": "String"
+			},
+			{
+				"name": "maxPricePerPiece",
+				"type": "String"
+			},
+			{
+				"name": "directCartType",
+				"type": "String"
+			},
+			{
+				"name": "priceCheckLessFlag",
+				"type": "String"
+			},
+			{
+				"name": "minStandardUnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "maxStandardUnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "recommendFlag",
+				"type": "String"
+			},
+			{
+				"name": "iconTypeList",
+				"type": "String"
+			},
+			{
+				"name": "volumeDiscountFlag",
+				"type": "String"
+			},
+			{
+				"name": "cValueFlag",
+				"type": "String"
+			},
+			{
+				"name": "stockItemFlag",
+				"type": "String"
+			},
+			{
+				"name": "displayStandardPriceFlag",
+				"type": "String"
+			},
+			{
+				"name": "discontinuedProductFlag",
+				"type": "String"
+			},
+			{
+				"name": "promptDeliveryFlag",
+				"type": "String"
+			},
+			{
+				"name": "keywordClickCount",
+				"type": "String"
+			},
+			{
+				"name": "specialShipmentFlag",
+				"type": "String"
+			},
+			{
+				"name": "recommendFlagdata",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
