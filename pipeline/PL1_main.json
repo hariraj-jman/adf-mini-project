@@ -157,6 +157,71 @@
 								},
 								"traceLevel": "Fine"
 							}
+						},
+						{
+							"name": "Joining",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "Cleaning",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "DF1_joining",
+									"type": "DataFlowReference",
+									"datasetParameters": {
+										"Quiz": {
+											"tablename": "Quiz",
+											"schema": "prep"
+										},
+										"Question": {
+											"tablename": "Question",
+											"schema": "prep"
+										},
+										"Option": {
+											"tablename": "Option",
+											"schema": "prep"
+										},
+										"Admin": {
+											"tablename": "Admin",
+											"schema": "prep"
+										},
+										"User": {
+											"tablename": "User",
+											"schema": "prep"
+										},
+										"UserQuiz": {
+											"tablename": "UserQuiz",
+											"schema": "prep"
+										},
+										"UserAnswer": {
+											"tablename": "UserAnswer",
+											"schema": "prep"
+										},
+										"sink1": {
+											"tablename": "result1",
+											"schema": "report"
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
 						}
 					]
 				}

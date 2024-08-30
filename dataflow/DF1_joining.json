@@ -1,0 +1,204 @@
+{
+	"name": "DF1_joining",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "Quiz"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "Question"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "Option"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "Admin"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "User"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "UserQuiz"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "UserAnswer"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS1_SQL_raw_Admin",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "UserAndUserQuiz"
+				},
+				{
+					"name": "join4"
+				},
+				{
+					"name": "join5"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as string,",
+				"          title as string,",
+				"          description as string,",
+				"          createdBy as string,",
+				"          shareableCode as string,",
+				"          responses as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Quiz",
+				"source(output(",
+				"          id as string,",
+				"          quizId as string,",
+				"          questionText as string,",
+				"          questionType as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Question",
+				"source(output(",
+				"          id as string,",
+				"          questionId as string,",
+				"          optionText as string,",
+				"          isCorrect as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Option",
+				"source(output(",
+				"          id as string,",
+				"          username as string,",
+				"          email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Admin",
+				"source(output(",
+				"          id as string,",
+				"          username as string,",
+				"          email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> User",
+				"source(output(",
+				"          id as string,",
+				"          userId as string,",
+				"          quizId as string,",
+				"          score as string,",
+				"          completedAt as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> UserQuiz",
+				"source(output(",
+				"          id as string,",
+				"          userQuizId as string,",
+				"          questionId as string,",
+				"          optionId as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> UserAnswer",
+				"Quiz, Question join(Quiz@id == quizId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1, Option join(Question@id == questionId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2, Admin join(createdBy == Admin@id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"User, UserQuiz join(User@id == userId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> UserAndUserQuiz",
+				"join3, UserAndUserQuiz join(Quiz@id == UserQuiz@quizId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4",
+				"join4, UserAnswer join(UserQuiz@id == userQuizId",
+				"     && Question@id == UserAnswer@questionId",
+				"     && Option@id == optionId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join5",
+				"join5 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
