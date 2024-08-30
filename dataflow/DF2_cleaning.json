@@ -1,0 +1,65 @@
+{
+	"name": "DF2_cleaning",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS2_SQL",
+						"type": "DatasetReference"
+					},
+					"name": "rawProducts"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "window1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          category as string,",
+				"          subCategory as string,",
+				"          subCategory1 as string,",
+				"          departmentCode as string,",
+				"          categoryCode as string,",
+				"          categoryName as string,",
+				"          searchCategoryCode as string,",
+				"          seriesCode as string,",
+				"          seriesName as string,",
+				"          brandCode as string,",
+				"          brandUrlCode as string,",
+				"          brandName as string,",
+				"          seriesStatus as string,",
+				"          minStandardDaysToShip as string,",
+				"          maxStandardDaysToShip as string,",
+				"          minPricePerPiece as string,",
+				"          maxPricePerPiece as string,",
+				"          directCartType as string,",
+				"          priceCheckLessFlag as string,",
+				"          minStandardUnitPrice as string,",
+				"          maxStandardUnitPrice as string,",
+				"          recommendFlag as string,",
+				"          iconTypeList as string,",
+				"          volumeDiscountFlag as string,",
+				"          cValueFlag as string,",
+				"          stockItemFlag as string,",
+				"          displayStandardPriceFlag as string,",
+				"          discontinuedProductFlag as string,",
+				"          promptDeliveryFlag as string,",
+				"          keywordClickCount as string,",
+				"          specialShipmentFlag as string,",
+				"          recommendFlagdata as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> rawProducts",
+				"rawProducts window(asc(seriesCode, true),",
+				"     Duplicate = iif(lag(seriesCode) == seriesCode, true(), false())) ~> window1"
+			]
+		}
+	}
+}
