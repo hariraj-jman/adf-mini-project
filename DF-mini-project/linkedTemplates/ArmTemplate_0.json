@@ -212,7 +212,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS1_SQL_raw_Admin')]",
+			"name": "[concat(parameters('factoryName'), '/DS1_SQL')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -576,7 +576,7 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "source1"
@@ -585,7 +585,7 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "sink1"
@@ -611,7 +611,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS1_SQL_raw_Admin')]"
+				"[concat(variables('factoryId'), '/datasets/DS1_SQL')]"
 			]
 		},
 		{
@@ -624,49 +624,49 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "Quiz"
 						},
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "Question"
 						},
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "Option"
 						},
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "Admin"
 						},
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "User"
 						},
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "UserQuiz"
 						},
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "UserAnswer"
@@ -675,7 +675,7 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "DS1_SQL_raw_Admin",
+								"referenceName": "DS1_SQL",
 								"type": "DatasetReference"
 							},
 							"name": "sink1"
@@ -820,7 +820,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS1_SQL_raw_Admin')]"
+				"[concat(variables('factoryId'), '/datasets/DS1_SQL')]"
 			]
 		},
 		{
@@ -1099,7 +1099,7 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "DS1_SQL_raw_Admin",
+											"referenceName": "DS1_SQL",
 											"type": "DatasetReference",
 											"parameters": {
 												"tablename": {
@@ -1236,7 +1236,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS1_blob_input')]",
-				"[concat(variables('factoryId'), '/datasets/DS1_SQL_raw_Admin')]",
+				"[concat(variables('factoryId'), '/datasets/DS1_SQL')]",
 				"[concat(variables('factoryId'), '/dataflows/DF1_clean')]",
 				"[concat(variables('factoryId'), '/dataflows/DF1_joining')]"
 			]
@@ -1304,7 +1304,7 @@
 						]
 					},
 					{
-						"name": "Cleaning",
+						"name": "Clean",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -1351,7 +1351,7 @@
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "Cleaning",
+								"activity": "Clean",
 								"dependencyConditions": [
 									"Succeeded"
 								]
