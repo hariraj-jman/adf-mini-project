@@ -1,0 +1,24 @@
+{
+	"name": "DestinationDataset_nnr",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseProject",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_table": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "raw",
+			"table": {
+				"value": "@dataset().cw_table",
+				"type": "Expression"
+			}
+		}
+	}
+}
